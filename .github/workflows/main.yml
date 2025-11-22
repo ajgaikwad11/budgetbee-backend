@@ -22,15 +22,8 @@ jobs:
     - name: Login to Amazon ECR
       uses: aws-actions/amazon-ecr-login@v1
 
-    - name: Build Docker image
+    - name: Build Docker image (correct path)
       run: |
-        docker build -t budgetbee-backend \
-          -f budgetbee-api/Dockerfile \
-          budgetbee-api
+        docker build -t budgetbee-backend -f budgetbee-api/Dockerfile budgetbee-api
         docker tag budgetbee-backend:latest \
-          ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.${{ secrets.AWS_REGION }}.amazonaws.com/${{ secrets.ECR_REPOSITORY }}:latest
-
-    - name: Push image to ECR
-      run: |
-        docker push \
-          ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.${{ secrets.AWS_REGION }}.amazonaws.c_
+          ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.${{ secrets.AWS_REGION }}.amazonaws.com/${{ secrets_
